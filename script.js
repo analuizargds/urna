@@ -1,9 +1,9 @@
 const candidatos = {
-  1: { nome: "Ana Banana", foto: "fotos/drink1.jpg" },
-  2: { nome: "Carolaine", foto: "fotos/drink2.jpg" },
-  3: { nome: "zé zé", foto: "fotos/drink3.jpg" },
+  1: { nome: "Ana Banana", foto: "fotos/analiana.jpeg" },
+  2: { nome: "Carolaine", foto: "fotos/carol.jpeg" },
+  3: { nome: "zé zé", foto: "fotos/bia.jpeg" },
   4: { nome: "Ana Li.", foto: "fotos/analidia.jpeg" },
-  5: { nome: "TATA", foto: "fotos/drink5.jpg" },
+  5: { nome: "TATA", foto: "fotos/drink5.jpeg" },
   6: { nome: "Ana Luíza Princesa", foto: "fotos/analuiza.jpeg" }
 };
 
@@ -18,7 +18,7 @@ let votante = "";
 let candidato = "";
 let entradaNota = "";
 let criterioAtual = 0;
-let totalAvaliacoes = 29;
+let totalAvaliacoes = 0;
 
 const telas = {
   votante: document.getElementById("tela-votante"),
