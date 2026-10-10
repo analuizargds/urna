@@ -53,7 +53,9 @@ function resetar() {
   document.getElementById("aviso-votante").textContent = "";
   document.getElementById("aviso-nota").textContent = "";
   document.getElementById("foto-votante").src = "fotos/user.png";
+  document.getElementById("foto-candidato").src = "fotos/user.png";
   document.getElementById("nome-votante").textContent = "";
+  document.getElementById("nome-candidato").textContent = "";
 }
 
 document.querySelectorAll("[data-votante]").forEach(botao => {

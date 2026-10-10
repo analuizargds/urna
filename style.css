@@ -21,7 +21,7 @@ body {
 }
 
 .tela {
-  min-height: 590px;
+  min-height: 620px;
   background: #f8f8f8;
 }
 
@@ -413,4 +413,12 @@ h1 {
   width: 80px;
   height: 110px;
   border-radius: 10%;
+}
+
+.teclado button:active,
+.acoes button:active,
+.btn-novo-voto:active {
+  transform: scale(0.95);
+  background-color: #555; /* Cor mais escura ao clicar */
+  transition: transform 0.1s ease, background-color 0.1s ease;
 }
