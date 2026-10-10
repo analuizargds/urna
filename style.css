@@ -423,3 +423,32 @@ h1 {
   background-color: #555; /* Cor mais escura ao clicar */
   transition: transform 0.1s ease, background-color 0.1s ease;
 }
+
+.acoes-apuracao button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+#voltar-votacao {
+  background-color: #f44336; /* Vermelho */
+  color: white;
+}
+
+#voltar-votacao:hover {
+  background-color: #d32f2f; /* Vermelho mais escuro */
+}
+
+#salvar-resultado {
+  background-color: #4caf50; /* Verde */
+  color: white;
+}
+
+#salvar-resultado:hover {
+  background-color: #388e3c; /* Verde mais escuro */
+}

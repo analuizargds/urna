@@ -268,6 +268,9 @@ function prepararCriterio() {
 }
 
 function finalizarVoto() {
+
+    salvarVotos();
+
     mostrarTela(telas.fim);
   
     setTimeout(() => {
@@ -283,6 +286,8 @@ function finalizarVoto() {
   }
 
 function apurarVotos() {
+  salvarVotos();
+
   const resultados = Object.keys(votos).map(numero => {
     const drink = votos[numero];
     const media = drink.quantidade > 0 ? drink.total / drink.quantidade : 0;
@@ -324,3 +329,79 @@ function apurarVotos() {
   document.getElementById("resultado-apuracao").innerHTML = html;
   mostrarTela(telas.apuracao);
 }
+
+function salvarVotos() {
+  localStorage.setItem("votos", JSON.stringify(votos));
+  localStorage.setItem("totalAvaliacoes", totalAvaliacoes);
+}
+
+function carregarVotos() {
+  const votosSalvos = localStorage.getItem("votos");
+  const avaliacoesSalvas = localStorage.getItem("totalAvaliacoes");
+
+  if (votosSalvos) {
+    Object.assign(votos, JSON.parse(votosSalvos));
+  }
+
+  if (avaliacoesSalvas) {
+    totalAvaliacoes = parseInt(avaliacoesSalvas, 10);
+  }
+}
+
+carregarVotos();
+
+document.getElementById("salvar-resultado").addEventListener("click", () => {
+  const resultados = Object.keys(votos).map(numero => {
+    const drink = votos[numero];
+
+    return {
+      numero: numero,
+      nome: candidatos[numero].nome,
+      apresentacao: drink.apresentacao,
+      complexidade: drink.complexidade,
+      sabor: drink.sabor,
+      criatividade: drink.criatividade,
+      total: drink.total,
+    };
+  });
+
+  // Converte os resultados para JSON
+  const json = JSON.stringify(resultados, null, 2);
+
+  // Cria um blob com o conteúdo JSON
+  const blob = new Blob([json], { type: "application/json" });
+
+  // Cria um link para download
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "resultado_votacao.json";
+
+  // Simula o clique no link para iniciar o download
+  link.click();
+
+  // Libera o objeto URL após o download
+  URL.revokeObjectURL(link.href);
+});
+
+document.getElementById("voltar-votacao").addEventListener("click", () => {
+  // Limpa o localStorage
+  localStorage.clear();
+
+  // Reseta os votos e a interface
+  Object.keys(votos).forEach(numero => {
+    votos[numero] = {
+      apresentacao: 0,
+      complexidade: 0,
+      sabor: 0,
+      criatividade: 0,
+      total: 0,
+      quantidade: 0
+    };
+  });
+
+  totalAvaliacoes = 0;
+
+  // Atualiza a interface para a tela inicial
+  resetar();
+  mostrarTela(telas.votante);
+});
