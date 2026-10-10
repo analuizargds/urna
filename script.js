@@ -17,7 +17,7 @@ let votante = "";
 let candidato = "";
 let entradaNota = "";
 let criterioAtual = 0;
-let totalAvaliacoes = 19; // máximo 20 avaliações com 5 participantes 
+let totalAvaliacoes = 0; // máximo 20 avaliações com 5 participantes 
 
 const telas = {
   votante: document.getElementById("tela-votante"),
