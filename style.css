@@ -66,7 +66,6 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 9px;
-  margin-bottom: 18px;
 }
 
 .teclado button {
@@ -92,6 +91,8 @@ h1 {
   display: flex;
   gap: 10px;
   align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .acoes button,
@@ -106,14 +107,18 @@ h1 {
 .btn-branco {
   background: white;
   border: 1px solid #aaa !important;
+  width: 100%;
 }
 
 .btn-corrige {
   background: #f28b24;
+  width: 100%;
 }
 
 .btn-confirma {
   background: #38b93c;
+  height: 100%;
+  width: 100%;
 }
 
 .btn-novo-voto {
@@ -318,4 +323,94 @@ h1 {
   .acoes {
     flex-wrap: wrap;
   }
+}
+
+.resultado-drink {
+  display: flex;
+  align-items: center;
+  /* margin: 1px 0; */
+  /* padding: 5px; */
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.resultado-drink .posicao {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.resultado-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 50px;
+}
+
+.resultado-info img.foto-candidato {
+  width: 50px;
+  height: 70px;
+  margin-bottom: 1px;
+}
+
+.resultado-info strong {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.barra-pontos {
+  width: 90%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 5px 0;
+  /* align-self: flex-end; */
+}
+
+.barra-pontos .barra-preenchida {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.5s ease;
+}
+
+.pontos {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.resultado-drink.borda-1 {
+  border-color: #b63d22; /* Vermelho */
+}
+
+.resultado-drink.borda-2 {
+  border-color: #00628b; /* Azul */
+}
+
+.resultado-drink.borda-3 {
+  border-color: #108325; /* Verde */
+}
+
+.resultado-drink.borda-4 {
+  border-color: #a1075f; /* Rosa */
+}
+
+.resultado-drink.borda-5 {
+  border-color: #bb8900; /* Amarelo */
+}
+
+.area-teclado {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  width: min-content;
+}
+
+.resultado-drink img.foto-candidato-resultado {
+  width: 80px;
+  height: 110px;
+  border-radius: 10%;
 }

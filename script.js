@@ -3,8 +3,7 @@ const candidatos = {
   2: { nome: "Carolaine", foto: "fotos/carol.jpeg" },
   3: { nome: "zé zé", foto: "fotos/bia.jpeg" },
   4: { nome: "Ana Li.", foto: "fotos/analidia.jpeg" },
-  5: { nome: "TATA", foto: "fotos/drink5.jpeg" },
-  6: { nome: "Ana Luíza Princesa", foto: "fotos/analuiza.jpeg" }
+  5: { nome: "Ana Luíza Princesa", foto: "fotos/analuiza.jpeg" }
 };
 
 const criterios = [
@@ -18,7 +17,7 @@ let votante = "";
 let candidato = "";
 let entradaNota = "";
 let criterioAtual = 0;
-let totalAvaliacoes = 0;
+let totalAvaliacoes = 19; // máximo 20 avaliações com 5 participantes 
 
 const telas = {
   votante: document.getElementById("tela-votante"),
@@ -33,8 +32,7 @@ const votos = {
     2: { apresentacao: 0, complexidade: 0, sabor: 0, criatividade: 0, total: 0, quantidade: 0 },
     3: { apresentacao: 0, complexidade: 0, sabor: 0, criatividade: 0, total: 0, quantidade: 0 },
     4: { apresentacao: 0, complexidade: 0, sabor: 0, criatividade: 0, total: 0, quantidade: 0 },
-    5: { apresentacao: 0, complexidade: 0, sabor: 0, criatividade: 0, total: 0, quantidade: 0 },
-    6: { apresentacao: 0, complexidade: 0, sabor: 0, criatividade: 0, total: 0, quantidade: 0 }
+    5: { apresentacao: 0, complexidade: 0, sabor: 0, criatividade: 0, total: 0, quantidade: 0 }
   };
 
 function mostrarTela(tela) {
@@ -52,7 +50,10 @@ function resetar() {
   document.getElementById("display-candidato").textContent = "";
   document.getElementById("display-nota").textContent = "";
   document.getElementById("aviso-candidato").textContent = "";
+  document.getElementById("aviso-votante").textContent = "";
   document.getElementById("aviso-nota").textContent = "";
+  document.getElementById("foto-votante").src = "fotos/user.png";
+  document.getElementById("nome-votante").textContent = "";
 }
 
 document.querySelectorAll("[data-votante]").forEach(botao => {
@@ -66,7 +67,8 @@ document.querySelectorAll("[data-votante]").forEach(botao => {
       document.getElementById("foto-votante").src = dados.foto;
       document.getElementById("nome-votante").textContent = dados.nome;
       document.getElementById("foto-votante").style.display = "block";
-    }
+      document.getElementById("aviso-votante").textContent = "";
+    } 
   });
 });
 
@@ -80,8 +82,9 @@ document.getElementById("branco-votante").addEventListener("click", () => {
 });
 
 document.getElementById("confirma-votante").addEventListener("click", () => {
-  if (!votante) {
-    alert("Digite o número do candidato que está votando.");
+  if (!votante || ["0", "6", "7", "8", "9"].includes(votante)) {
+    document.getElementById("aviso-votante").textContent =
+      "Digite um candidato válido.";
     return;
   }
 
@@ -92,7 +95,17 @@ document.querySelectorAll("[data-candidato]").forEach(botao => {
   botao.addEventListener("click", () => {
     const numero = botao.dataset.candidato;
 
-    if (numero === "0") return;
+    if (["0", "6", "7", "8", "9"].includes(numero)) {
+      document.getElementById("aviso-candidato").textContent =
+        "Nenhum candidato com esse número.";
+      candidato = "";
+      document.getElementById("display-candidato").textContent = "";
+      document.getElementById("nome-candidato").textContent = "";
+      document.getElementById("numero-candidato").textContent = "";
+      document.getElementById("foto-candidato").style.display = "none";
+      document.getElementById("foto-candidato").src = "fotos/user.png"
+      return;
+    };
 
     if (numero === votante) {
       document.getElementById("aviso-candidato").textContent =
@@ -204,15 +217,12 @@ document.getElementById("corrige-nota").addEventListener("click", () => {
     votos[candidato].criatividade += nota;
     }
 
-  // Por enquanto, apenas avança pelas telas.
-  // A gravação/apuração dos votos será adicionada depois.
   criterioAtual++;
 
   if (criterioAtual >= criterios.length) {
 
     totalAvaliacoes++;
 
-    // Soma as notas do drink
     votos[candidato].total =
     votos[candidato].apresentacao +
     votos[candidato].complexidade +
@@ -224,7 +234,7 @@ document.getElementById("corrige-nota").addEventListener("click", () => {
     somUrna.currentTime = 0;
     somUrna.play();
 
-    if (totalAvaliacoes === 30) {
+    if (totalAvaliacoes === 20) {
         finalizarVoto();
 
         setTimeout(() => {
@@ -232,7 +242,7 @@ document.getElementById("corrige-nota").addEventListener("click", () => {
         }, 3500);
 
     } else {
-        // Votos 1 até 29
+        // Votos 1 até 19
         finalizarVoto();
     }
   } else {
@@ -260,9 +270,7 @@ function finalizarVoto() {
   
     setTimeout(() => {
 
-        if (totalAvaliacoes === 30) {
-          // Não volta para a identificação.
-          // A apuração será aberta pelo código acima.
+        if (totalAvaliacoes === 20) {
           return;
         }
     
@@ -272,79 +280,45 @@ function finalizarVoto() {
       }, 3000);
   }
 
-  function apurarVotos() {
+function apurarVotos() {
+  const resultados = Object.keys(votos).map(numero => {
+    const drink = votos[numero];
+    const media = drink.quantidade > 0 ? drink.total / drink.quantidade : 0;
 
-    const resultados = Object.keys(votos).map(numero => {
-  
-      const drink = votos[numero];
-  
-      const media =
-        drink.quantidade > 0
-          ? drink.total / drink.quantidade
-          : 0;
-  
-      return {
-        numero: numero,
-        nome: candidatos[numero].nome,
-        apresentacao: drink.apresentacao,
-        complexidade: drink.complexidade,
-        sabor: drink.sabor,
-        criatividade: drink.criatividade,
-        total: drink.total,
-        media: media
-      };
-  
-    });
-  
-    // Ordena pela maior pontuação
-    resultados.sort((a, b) => b.total - a.total);
-  
-    let html = "";
-  
-    resultados.forEach((drink, index) => {
-  
-      html += `
-        <div class="resultado-drink">
-  
-          <div class="posicao">
-            ${index + 1}º
+    return {
+      numero: numero,
+      nome: candidatos[numero].nome,
+      foto: candidatos[numero].foto,
+      apresentacao: drink.apresentacao,
+      complexidade: drink.complexidade,
+      sabor: drink.sabor,
+      criatividade: drink.criatividade,
+      total: drink.total,
+      media: media
+    };
+  });
+
+  resultados.sort((a, b) => b.total - a.total);
+
+  let html = "";
+
+  resultados.forEach((drink, index) => {
+    const porcentagem = (drink.total / 80) * 100; // Ajuste o divisor conforme o máximo de pontos possíveis
+    const bordaClasse = `borda-${(index % 5) + 1}`;
+    html += `
+      <div class="resultado-drink ${bordaClasse}">
+        <img src="${drink.foto}" alt="${drink.nome}" class="foto-candidato-resultado">
+        <div class="resultado-info">
+          <strong>${drink.nome}</strong>
+          <div class="barra-pontos">
+            <div class="barra-preenchida" style="width: ${porcentagem}%;"></div>
           </div>
-  
-          <div class="resultado-info">
-  
-            <strong>
-              ${drink.nome}
-            </strong>
-  
-            <span>
-              Apresentação: ${drink.apresentacao}
-            </span>
-  
-            <span>
-              Complexidade: ${drink.complexidade}
-            </span>
-  
-            <span>
-              Sabor: ${drink.sabor}
-            </span>
-  
-            <span>
-              Criatividade: ${drink.criatividade}
-            </span>
-  
-          </div>
-  
-          <div class="resultado-total">
-            <strong>${drink.total}</strong>
-            <small>pontos</small>
-          </div>
-  
+          <span class="pontos">${drink.total} pontos</span>
         </div>
-      `;
-  
-    });
-  
-    document.getElementById("resultado-apuracao").innerHTML = html;
-  
-    mostrarTela(telas.apuracao);
-  }
+      </div>
+    `;
+  });
+
+  document.getElementById("resultado-apuracao").innerHTML = html;
+  mostrarTela(telas.apuracao);
+}

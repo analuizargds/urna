@@ -22,32 +22,36 @@
             <img id="foto-votante" src="" alt="Foto do votante">
             <strong id="nome-votante"></strong>
           </div>
+        
+        <div class="area-teclado">
 
-        <div class="teclado">
-          <button data-votante="1">1</button>
-          <button data-votante="2">2</button>
-          <button data-votante="3">3</button>
-          <button data-votante="4">4</button>
-          <button data-votante="5">5</button>
-          <button data-votante="6">6</button>
-          <button data-votante="7" disabled>7</button>
-          <button data-votante="8" disabled>8</button>
-          <button data-votante="9" disabled>9</button>
-          <button class="tecla-zero" data-votante="0" disabled>0</button>
-        </div>
+          <div class="teclado">
+            <button data-votante="1">1</button>
+            <button data-votante="2">2</button>
+            <button data-votante="3">3</button>
+            <button data-votante="4">4</button>
+            <button data-votante="5">5</button>
+            <button data-votante="6">6</button>
+            <button data-votante="7">7</button>
+            <button data-votante="8">8</button>
+            <button data-votante="9">9</button>
+            <button class="tecla-zero" data-votante="0">0</button>
+          </div>
 
-        <div class="acoes">
-          <button class="btn-branco" id="branco-votante">BRANCO</button>
-          <button class="btn-corrige" id="corrige-votante">CORRIGE</button>
-          <button class="btn-confirma" id="confirma-votante">CONFIRMA</button>
+          <div class="acoes">
+            <button class="btn-branco" id="branco-votante">BRANCO</button>
+            <button class="btn-corrige" id="corrige-votante">CORRIGE</button>
+            <button class="btn-confirma" id="confirma-votante">CONFIRMA</button>
+          </div>
         </div>
+        <p class="aviso" id="aviso-votante"></p>
       </div>
     </section>
 
     <section class="tela escondida" id="tela-candidato">
       <div class="conteudo">
         <h1>CANDIDATO</h1>
-        <p class="subtitulo">Digite o número do drink que deseja avaliar</p>
+        <p class="subtitulo">Digite o número do candidato que deseja avaliar</p>
 
         <div class="display">
           <span id="display-candidato"></span>
@@ -60,23 +64,25 @@
           </div>
         </div>
 
-        <div class="teclado">
-          <button data-candidato="1">1</button>
-          <button data-candidato="2">2</button>
-          <button data-candidato="3">3</button>
-          <button data-candidato="4">4</button>
-          <button data-candidato="5">5</button>
-          <button data-candidato="6">6</button>
-          <button data-candidato="7" disabled>7</button>
-          <button data-candidato="8" disabled>8</button>
-          <button data-candidato="9" disabled>9</button>
-          <button class="tecla-zero" data-candidato="0" disabled>0</button>
-        </div>
+        <div class="area-teclado">
+          <div class="teclado">
+              <button data-candidato="1">1</button>
+            <button data-candidato="2">2</button>
+            <button data-candidato="3">3</button>
+            <button data-candidato="4">4</button>
+            <button data-candidato="5">5</button>
+            <button data-candidato="6">6</button>
+            <button data-candidato="7">7</button>
+            <button data-candidato="8">8</button>
+            <button data-candidato="9">9</button>
+            <button class="tecla-zero" data-candidato="0">0</button>
+          </div>
 
-        <div class="acoes">
-          <button class="btn-branco" id="branco-candidato">BRANCO</button>
-          <button class="btn-corrige" id="corrige-candidato">CORRIGE</button>
-          <button class="btn-confirma" id="confirma-candidato">CONFIRMA</button>
+          <div class="acoes">
+            <button class="btn-branco" id="branco-candidato">BRANCO</button>
+            <button class="btn-corrige" id="corrige-candidato">CORRIGE</button>
+            <button class="btn-confirma" id="confirma-candidato">CONFIRMA</button>
+          </div>
         </div>
 
         <p class="aviso" id="aviso-candidato"></p>
@@ -97,22 +103,24 @@
           <span id="display-nota"></span>
         </div>
 
-        <div class="teclado notas">
-          <button data-nota="1">1</button>
-          <button data-nota="2">2</button>
-          <button data-nota="3">3</button>
-          <button data-nota="4">4</button>
-          <button data-nota="5">5</button>
-          <button data-nota="6" disabled>6</button>
-          <button data-nota="7" disabled>7</button>
-          <button data-nota="8" disabled>8</button>
-          <button data-nota="9" disabled>9</button>
-          <button data-nota="0">0</button>
-        </div>
+        <div class="area-teclado">
+          <div class="teclado">
+            <button data-nota="1">1</button>
+            <button data-nota="2">2</button>
+            <button data-nota="3">3</button>
+            <button data-nota="4">4</button>
+            <button data-nota="5">5</button>
+            <button data-nota="6" disabled>6</button>
+            <button data-nota="7" disabled>7</button>
+            <button data-nota="8" disabled>8</button>
+            <button data-nota="9" disabled>9</button>
+            <button class="tecla-zero" data-nota="0">0</button>
+          </div>
 
-        <div class="acoes">
-          <button class="btn-corrige" id="corrige-nota">CORRIGE</button>
-          <button class="btn-confirma" id="confirma-nota">CONFIRMA</button>
+          <div class="acoes">
+            <button class="btn-corrige" id="corrige-nota">CORRIGE</button>
+            <button class="btn-confirma" id="confirma-nota">CONFIRMA</button>
+          </div>
         </div>
 
         <p class="aviso" id="aviso-nota"></p>
