@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
   background: #202020;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
@@ -15,14 +15,15 @@ body {
 
 .urna {
   width: min(920px, 94vw);
-  min-height: 620px;
+  height: 620px;
   background: #eee;
   box-shadow: 0 12px 35px rgba(0,0,0,.35);
 }
 
 .tela {
-  min-height: 620px;
+  height: 620px;
   background: #f8f8f8;
+  overflow-y: auto;
 }
 
 .escondida {
@@ -30,7 +31,7 @@ body {
 }
 
 .conteudo {
-  min-height: 590px;
+  height: 590px;
   padding: 42px 55px;
   position: relative;
 }
